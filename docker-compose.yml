@@ -1,0 +1,13 @@
+version: '3.7'
+services:
+  db:
+    container_name: db-learning-sys
+    image: postgres
+    environment: 
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_DB: ${DB_NAME}
+    volumes:
+    - ./.data/pgdata:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
