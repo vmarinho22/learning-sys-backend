@@ -1,50 +1,3 @@
-/*
-  Warnings:
-
-  - The primary key for the `Historic` table will be changed. If it partially fails, the table could be left without primary key constraint.
-  - The `id` column on the `Historic` table would be dropped and recreated. This will lead to data loss if there is data in the column.
-  - The primary key for the `Logs` table will be changed. If it partially fails, the table could be left without primary key constraint.
-  - The `id` column on the `Logs` table would be dropped and recreated. This will lead to data loss if there is data in the column.
-  - You are about to drop the `Trainings` table. If the table is not empty, all the data it contains will be lost.
-  - You are about to drop the `Users` table. If the table is not empty, all the data it contains will be lost.
-  - Changed the type of `userId` on the `Historic` table. No cast exists, the column would be dropped and recreated, which cannot be done if there is data, since the column is required.
-  - Changed the type of `trainingId` on the `Historic` table. No cast exists, the column would be dropped and recreated, which cannot be done if there is data, since the column is required.
-  - Changed the type of `userId` on the `Logs` table. No cast exists, the column would be dropped and recreated, which cannot be done if there is data, since the column is required.
-
-*/
--- DropForeignKey
-ALTER TABLE "Historic" DROP CONSTRAINT "Historic_trainingId_fkey";
-
--- DropForeignKey
-ALTER TABLE "Historic" DROP CONSTRAINT "Historic_userId_fkey";
-
--- DropForeignKey
-ALTER TABLE "Logs" DROP CONSTRAINT "Logs_userId_fkey";
-
--- AlterTable
-ALTER TABLE "Historic" DROP CONSTRAINT "Historic_pkey",
-DROP COLUMN "id",
-ADD COLUMN     "id" SERIAL NOT NULL,
-DROP COLUMN "userId",
-ADD COLUMN     "userId" INTEGER NOT NULL,
-DROP COLUMN "trainingId",
-ADD COLUMN     "trainingId" INTEGER NOT NULL,
-ADD CONSTRAINT "Historic_pkey" PRIMARY KEY ("id");
-
--- AlterTable
-ALTER TABLE "Logs" DROP CONSTRAINT "Logs_pkey",
-DROP COLUMN "id",
-ADD COLUMN     "id" SERIAL NOT NULL,
-DROP COLUMN "userId",
-ADD COLUMN     "userId" INTEGER NOT NULL,
-ADD CONSTRAINT "Logs_pkey" PRIMARY KEY ("id");
-
--- DropTable
-DROP TABLE "Trainings";
-
--- DropTable
-DROP TABLE "Users";
-
 -- CreateTable
 CREATE TABLE "User" (
     "id" SERIAL NOT NULL,
@@ -70,6 +23,29 @@ CREATE TABLE "Training" (
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "Training_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Historic" (
+    "id" SERIAL NOT NULL,
+    "userId" INTEGER NOT NULL,
+    "trainingId" INTEGER NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "Historic_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Logs" (
+    "id" SERIAL NOT NULL,
+    "userId" INTEGER NOT NULL,
+    "ip" TEXT NOT NULL,
+    "request" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "Logs_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
