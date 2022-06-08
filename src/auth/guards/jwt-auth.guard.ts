@@ -8,8 +8,8 @@ import { Reflector } from '@nestjs/core';
 import { AuthGuard } from '@nestjs/passport';
 // Decorators
 import { IS_PUBLIC_KEY } from '../decorators/is-public.decorator';
-// Error Handling
-import { UnauthorizedError } from '../errors/unauthorized.error';
+// // Error Handling
+// import { UnauthorizedError } from '../errors/unauthorized.error';
 
 @Injectable()
 export class JwtAuthGuard extends AuthGuard('jwt') {
@@ -36,9 +36,9 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
     const canActivatePromise = canActivate as Promise<boolean>;
 
     return canActivatePromise.catch((error) => {
-      if (error instanceof UnauthorizedError) {
-        throw new UnauthorizedException(error.message);
-      }
+      // if (error instanceof UnauthorizedError) {
+      //   throw new UnauthorizedException(error.message);
+      // }
 
       throw new UnauthorizedException();
     });
