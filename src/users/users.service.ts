@@ -43,6 +43,16 @@ export class UsersService {
     return filteredUsers;
   }
 
+  async findByMail(mail: string): Promise<User> {
+    const fetchedUser = await this.prisma.user.findUnique({
+      where: {
+        mail
+      }
+    });
+
+    return fetchedUser;
+  }
+
   async findOne(id: number): Promise<User> {
     const fetchedUser = await this.prisma.user.findUnique({
       where: {
