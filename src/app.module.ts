@@ -8,9 +8,10 @@ import { UsersModule } from './users/users.module';
 import { TrainingsModule } from './trainings/trainings.module';
 import { HistoricsModule } from './historics/historics.module';
 import { SectorsModule } from './sectors/sectors.module';
+import { ContentsModule } from './contents/contents.module';
 
 @Module({
-  imports: [UsersModule, AuthModule, TrainingsModule, HistoricsModule, SectorsModule],
+  imports: [UsersModule, AuthModule, TrainingsModule, HistoricsModule, SectorsModule, ContentsModule],
   controllers: [AppController],
   providers: [
     AppService,
