@@ -7,9 +7,10 @@ import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
 import { UsersModule } from './users/users.module';
 import { TrainingsModule } from './trainings/trainings.module';
 import { HistoricsModule } from './historics/historics.module';
+import { SectorsModule } from './sectors/sectors.module';
 
 @Module({
-  imports: [UsersModule, AuthModule, TrainingsModule, HistoricsModule],
+  imports: [UsersModule, AuthModule, TrainingsModule, HistoricsModule, SectorsModule],
   controllers: [AppController],
   providers: [
     AppService,
